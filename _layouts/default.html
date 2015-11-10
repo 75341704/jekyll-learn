@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>jekyll-learn</title>
+    <meta charset="UTF-8">
+    <title>jekyll-learn</title>
+    <link rel="stylesheet" href="{{site.baseurl}}/css/common.css">
 </head>
+
 <body>
-<header>
-	<strong> jekyll-learn header </strong>
-	<nav>
-		<ul>
-			<li><a href="{{site.baseurl}}/index.html">Home</a></li>
-			<li><a href="{{site.baseurl}}/news.html">News</a></li>
-		</ul>
-	</nav>
-</header>
-{{content}}
+    <header>
+        <strong> jekyll-learn header </strong>
+        {% include nav.html navclass='nav-top' %}
+    </header>
+    {{content}}
+    <footer>
+    {% include nav.html navclass='nav-bottom' %}
+        <p> 2015 jekyll-learn </p>
+    </footer>
 </body>
+
 </html>
