@@ -5,10 +5,86 @@
     <meta charset="UTF-8">
     <title>jekyll-learn</title>
     <link rel="stylesheet" href="{{site.baseurl}}/css/common.css">
+    <link rel="stylesheet" href="{{site.baseurl}}/css/jquery.fullPage.css">
+
+    <style>
+    #menu {
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        list-style-type: none;
+        z-index: 70;
+    }
+    
+    #menu li {
+        float: left;
+        margin: 0 10px 0 0;
+        font-size: 14px;
+    }
+    
+    #menu a {
+        float: left;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #426eab;
+        text-decoration: none;
+    }
+    
+    #menu .active a {
+        color: #fff;
+        background-color: #426eab;
+    }
+    
+    .section {
+        text-align: center;
+        font: 20px "Microsoft Yahei";
+        color: #426eab;
+    }
+
+    .default_range{
+        width:90%;
+        margin:auto auto;
+    }
+    </style>
 </head>
 
 <body>
-    <header>
+
+    <ul id="menu">
+    {% for section in site.categories.section %}
+        <li data-menuanchor="{{section.anchor}}" class="{{section.class}}"><a href="#{{section.anchor}}">{{section.title}}</a></li>
+       <!--  <li data-menuanchor="page1" class="active"><a href="#page1">第一屏</a></li>
+        <li data-menuanchor="page2"><a href="#page2">第二屏</a></li>
+        <li data-menuanchor="page3"><a href="#page3">第三屏</a></li>
+        <li data-menuanchor="page4"><a href="#page4">第四屏</a></li> -->
+        {% endfor %}
+    </ul>
+    <div id="main">
+        {% for section in site.categories.section %}
+<!--         <li data-menuanchor="{{section.anchor}}" class="{{section.class}}"><a href="#{{section.anchor}}">{{section.title}}</a></li> -->
+        <div class="section">
+            {{section.content}}
+        </div>
+       <!--  <li data-menuanchor="page1" class="active"><a href="#page1">第一屏</a></li>
+        <li data-menuanchor="page2"><a href="#page2">第二屏</a></li>
+        <li data-menuanchor="page3"><a href="#page3">第三屏</a></li>
+        <li data-menuanchor="page4"><a href="#page4">第四屏</a></li> -->
+        {% endfor %}
+
+       <!--  <div class="section">
+            <h3>第二屏</h3>
+        </div>
+        <div class="section">
+            <h3>第三屏</h3>
+        </div>
+        <div class="section">
+            <h3>第四屏</h3>
+            <p>这是最后一屏了，继续往下滚返回第一屏</p>
+        </div> -->
+    </div>
+    <!--   <header>
         <strong> jekyll-learn header </strong>
         {% include nav.html navclass='nav-top' %}
     </header>
@@ -16,7 +92,25 @@
     <footer>
     {% include nav.html navclass='nav-bottom' %}
         <p> 2015 jekyll-learn </p>
-    </footer>
+    </footer> -->
+        <script src="{{site.baseurl}}/js/jquery-1.8.3.min.js"></script>
+    <script src="{{site.baseurl}}/js/jquery.fullPage.min.js"></script>
+        <script type="text/javascript">
+    $(function() {
+        $("#main").fullpage({
+            // sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
+            // continuousVertical: true,
+            'navigation': true,
+            menu: '#menu',
+            anchors: [
+            {% for section in site.categories.section %}
+            '{{section.anchor}}',
+{% endfor %}
+],//end anchors
+        });
+    });
+    </script>
+
 </body>
 
 </html>
